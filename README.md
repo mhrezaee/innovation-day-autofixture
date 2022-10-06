@@ -1,6 +1,6 @@
 # Using Autofixture in Unit Test projects
 
-Autofixture is an open source library which helps write less code and simplify arrange phase code (set up test data), specially dealing with big objects containing required fields by generating annoymous test data.
+Autofixture is an open source library which helps write less code and simplify the arrange phase (set up test data), specially dealing with big objects containing required fields and nested objects by generating annoymous test data.
  
  ### What is Annoymous test data?
  - Data that is Required to be present for the test to be able to execute but where the value itself isn't important.
