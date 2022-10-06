@@ -19,6 +19,8 @@ public class UserController : ControllerBase
             return BadRequest("password and confirm does not match!");
         }
         
+        //UserRepository.Create(user);
+
         return Ok("Hurray! User Created Successfully!");
 
     }
