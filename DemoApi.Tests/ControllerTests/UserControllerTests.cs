@@ -6,6 +6,7 @@ using DemoApi.Models;
 using DemoApi.Tests.Helpers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Xunit.Sdk;
 
 namespace DemoApi.Tests.ControllerTests;
 
@@ -134,4 +135,5 @@ public class UserControllerTests
         //assert
         result.Should().BeOfType<BadRequestObjectResult>();
     }
+    
 }

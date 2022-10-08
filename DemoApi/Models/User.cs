@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DemoApi.Models;
 
@@ -17,7 +18,12 @@ public class User
     public string? Password { get; set; }
     [Required]
     public string? ConfirmPassword { get; set; }
-
+    
     public Guid AddressId { get; set; }
     public virtual Address Address { get; set; }
+    
+    public override string ToString()
+    {
+        return $"{Id}-{Lastname}";
+    }
 }
