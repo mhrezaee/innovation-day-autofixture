@@ -64,7 +64,7 @@ public class UserControllerTests
 
     //note: it never create unique data for same type!
     [Fact]
-    public void Post_WhenPasswordDoesNotMatch_ShouldReturnForbiddenWithAutoFixture1()
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnBadRequestWithAutoFixture1()
     {
         //arrange
         var user = _fixture.Create<User>();
@@ -80,7 +80,7 @@ public class UserControllerTests
 
     //define partially with builder pattern!
     [Fact]
-    public void Post_WhenPasswordDoesNotMatch_ShouldReturnForbiddenWithAutoFixture2()
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnBadRequestWithAutoFixture2()
     {
         //arrange
         var user = _fixture.Build<User>()
@@ -98,7 +98,7 @@ public class UserControllerTests
 
     //note: enable email RegEx in User Model
     [Fact]
-    public void Post_WhenPasswordDoesNotMatch_ShouldReturnForbiddenWithAutoFixture3()
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnBadRequestWithAutoFixture3()
     {
         //arrange
         var user = _fixture.Build<User>()
@@ -115,11 +115,9 @@ public class UserControllerTests
         result.Should().BeOfType<BadRequestObjectResult>();
     }
 
-
-
     //note: enable email RegEx in User Model
     [Fact]
-    public void Post_WhenPasswordDoesNotMatch_ShouldReturnForbiddenWithAutoFixtureAndBogus()
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnBadRequestWithAutoFixtureAndBogus()
     {
         //arrange
         var user = _fixture.Build<User>()
@@ -135,5 +133,30 @@ public class UserControllerTests
         //assert
         result.Should().BeOfType<BadRequestObjectResult>();
     }
-    
+
+    //use customize
+    [Fact]
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnForbiddenWithAutoFixture4()
+    {
+        //customize section can be in more general section and just called here
+        _fixture.Customize<Address>(u => 
+            u.With(x=>x.CountryCode, "AT")
+        );
+
+        //arrange
+        var user = _fixture.Build<User>()
+            .With(x => x.Password, "ABC")
+            .With(x => x.ConfirmPassword, "ABCDF")
+            .With(x => x.Email, _fixture.Create<MailAddress>().Address)
+            .Create();
+
+        //act
+        _sut.Validate(user);
+        var result = _sut.Post(user);
+
+        //assert
+        result.Should().BeOfType<BadRequestObjectResult>();
+    }
+
+
 }
