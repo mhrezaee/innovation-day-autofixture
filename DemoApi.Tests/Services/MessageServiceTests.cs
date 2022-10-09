@@ -12,11 +12,15 @@ public class MessageServiceTests
     [Fact]
     public void Send_WithMoq()
     {
+
+        //arrange
         var gatewayMock = new Mock<IMessageGateway>();
         var sut = new MessageService(gatewayMock.Object);
 
-        var result = sut.Send("email@test.com","some message here");
+        //act
+        var result = sut.Send("email@test.com", "some message here");
 
+        //assert
         gatewayMock.Verify(x=>x.Send(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         result.Should().BeTrue();
 
@@ -25,13 +29,15 @@ public class MessageServiceTests
     [Fact]
     public void Send_WithAutoFixtureAutoMoq()
     {
+        //arrange
         var fixture = new Fixture();
         fixture.Customize(new AutoMoqCustomization());
-        
         var sut = fixture.Create<MessageService>();
 
+        //act
         var result = sut.Send("email@test.com", "some message here");
 
+        //assert
         result.Should().BeTrue();
     }
 
@@ -39,13 +45,34 @@ public class MessageServiceTests
     [AutoData]
     public void Send_WithAutoFixtureAutoMoqAndAutoData(string address,string messageBody)
     {
+        //arrange
         var fixture = new Fixture();
         fixture.Customize(new AutoMoqCustomization());
-
         var sut = fixture.Create<MessageService>();
 
+        //act
         var result = sut.Send(address, messageBody);
 
+        //assert
+        result.Should().BeTrue();
+
+    }
+
+    [Theory]
+    [AutoData]
+    public void Send_WithAutoFixtureAutoMoqAndAutoDataAndFreezeInterface(string address, string messageBody)
+    {
+        //arrange
+        var fixture = new Fixture();
+        fixture.Customize(new AutoMoqCustomization());
+        var mockGateway = fixture.Freeze<Mock<IMessageGateway>>();
+        var sut = fixture.Create<MessageService>();
+
+        //act
+        var result = sut.Send(address, messageBody);
+
+        //assert
+        mockGateway.Verify(x => x.Send(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         result.Should().BeTrue();
     }
 }
