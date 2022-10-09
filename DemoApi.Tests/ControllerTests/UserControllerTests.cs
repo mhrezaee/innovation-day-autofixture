@@ -1,5 +1,6 @@
 ﻿using System.Net.Mail;
 using AutoFixture;
+using AutoFixture.Xunit2;
 using Bogus;
 using DemoApi.Controllers;
 using DemoApi.Models;
@@ -114,7 +115,7 @@ public class UserControllerTests
         //assert
         result.Should().BeOfType<BadRequestObjectResult>();
     }
-
+    
     //note: enable email RegEx in User Model
     [Fact]
     public void Post_WhenPasswordDoesNotMatch_ShouldReturnBadRequestWithAutoFixtureAndBogus()
@@ -158,5 +159,18 @@ public class UserControllerTests
         result.Should().BeOfType<BadRequestObjectResult>();
     }
 
+    //note: use autodata to generate test data
+    [Theory]
+    [AutoData]
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnBadRequestWithAutoFixtureWithAutoData(User user)
+    {
+        //arrange
+        //act
+        _sut.Validate(user);
+        var result = _sut.Post(user);
+
+        //assert
+        result.Should().BeOfType<BadRequestObjectResult>();
+    }
 
 }
