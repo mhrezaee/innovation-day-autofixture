@@ -25,12 +25,12 @@ public class UserControllerTests
     public void Post_WhenPasswordDoesNotMatch_ShouldReturnForbiddenWithoutAutoFixture()
     {
         //arrange
-        var user = new User()
+        /*var user = new User()
         {
             Password = "123",
             ConfirmPassword = "ABC"
-        };
-        /*var user = new User()
+        };*/
+        var user = new User()
         {
             Id = Guid.NewGuid(),
             Email = "test@test.com",
@@ -48,7 +48,6 @@ public class UserControllerTests
                 Street = "InvalidStrasse"
             }
         };
-        */
 
         //act
         _sut.Validate(user);
