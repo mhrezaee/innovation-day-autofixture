@@ -1,6 +1,8 @@
-﻿
+﻿using BenchmarkDotNet.Running;
+using DemoApi.Benchmark;
 
 
+BenchmarkRunner.Run<BenchmarkTests>();
 
 
-Console.WriteLine("Hello, World!");
+Console.ReadKey();
