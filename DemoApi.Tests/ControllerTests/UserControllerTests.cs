@@ -1,16 +1,11 @@
 ﻿using System.Net.Mail;
 using AutoFixture;
-using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using DemoApi.Controllers;
 using DemoApi.Models;
 using DemoApi.Tests.Helpers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Moq;
-using Xunit.Sdk;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace DemoApi.Tests.ControllerTests;
 
@@ -18,12 +13,10 @@ public class UserControllerTests
 {
     private readonly UserController _sut;
     private readonly Fixture _fixture;
-    private readonly Mock<ILogger> _loggerMock;
-
+    
     public UserControllerTests()
     {
-        _loggerMock = new Mock<ILogger>();
-        _sut = new UserController(_loggerMock.Object);
+        _sut = new UserController();
         _fixture = new Fixture();
     }
 
@@ -79,7 +72,6 @@ public class UserControllerTests
 
         //assert
         result.Should().BeOfType<BadRequestObjectResult>();
-        _loggerMock.Verify(x=>x.LogTrace(It.IsAny<string>()), Times.Once);
     }
 
 
