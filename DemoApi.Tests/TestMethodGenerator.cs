@@ -63,4 +63,70 @@ public class TestMethodGenerator
             _output.WriteLine(method.ToString());
         }
     }
+
+
+    [Fact]
+    public void GenerateTestWithManualObjectCreation()
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            var method = new StringBuilder();
+            method.Append($@"[Fact]
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnForbiddenWithoutAutoFixture{i}()");
+            method.Append(@"{
+        //arrange
+        var user = new User()
+        {
+            Id = Guid.NewGuid(),
+            Email = ""test@test.com"",
+            Firstname = ""some first name"",
+            Lastname = ""some last name"",
+            Password = ""12345"",
+            ConfirmPassword = ""1234567"",
+            AddressId = Guid.NewGuid(),
+            Address = new Address()
+            {
+                Id = Guid.NewGuid(),
+                City = ""Vienna"",
+                CountryCode = ""AT"",
+                PostalCode = ""1030"",
+                Street = ""InvalidStrasse""
+            }
+        };
+
+        //act
+        _sut.Validate(user);
+        var result = _sut.Post(user);
+
+        //assert
+        result.Should().BeOfType<BadRequestObjectResult>();
+    }");
+
+
+            _output.WriteLine(method.ToString());
+        }
+    }
+
+    [Fact]
+    public void GenerateTestCreateObjectWithAutoFixture()
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            var method = new StringBuilder();
+            method.Append($@"[Fact]
+    public void Post_WhenPasswordDoesNotMatch_ShouldReturnBadRequestWithAutoFixture{i}()");
+            method.Append(@"{
+        //arrange
+        var user = _fixture.Create<User>();
+        
+        //act
+        _sut.Validate(user);
+        var result = _sut.Post(user);
+
+        //assert
+        result.Should().BeOfType<BadRequestObjectResult>();
+    }");
+            _output.WriteLine(method.ToString());
+        }
+    }
 }
