@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApi.Tests", "DemoApi.Tests\DemoApi.Tests.csproj", "{E9B4982D-DB21-47BC-ABBA-F65703A2275F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApi.Tests", "DemoApi.Tests\DemoApi.Tests.csproj", "{E9B4982D-DB21-47BC-ABBA-F65703A2275F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApi", "DemoApi\DemoApi.csproj", "{97882099-A5CF-4810-B516-3F61734DC573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApi", "DemoApi\DemoApi.csproj", "{97882099-A5CF-4810-B516-3F61734DC573}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApi.Benchmark", "DemoApi.Benchmark\DemoApi.Benchmark.csproj", "{CA28A25F-82FE-417E-8F5E-831A8D186087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{97882099-A5CF-4810-B516-3F61734DC573}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97882099-A5CF-4810-B516-3F61734DC573}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97882099-A5CF-4810-B516-3F61734DC573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA28A25F-82FE-417E-8F5E-831A8D186087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA28A25F-82FE-417E-8F5E-831A8D186087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA28A25F-82FE-417E-8F5E-831A8D186087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA28A25F-82FE-417E-8F5E-831A8D186087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

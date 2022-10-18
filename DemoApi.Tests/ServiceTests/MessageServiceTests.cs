@@ -6,7 +6,7 @@ using DemoApi.Tests.Infrastructure.Attributes;
 using FluentAssertions;
 using Moq;
 
-namespace DemoApi.Tests.Services;
+namespace DemoApi.Tests.ServiceTests;
 
 public class MessageServiceTests
 {
