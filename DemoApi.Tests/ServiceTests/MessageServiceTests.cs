@@ -61,7 +61,7 @@ public class MessageServiceTests
 
     [Theory]
     [AutoMoqData]
-    public void Send_WithAutoFixtureAutoMoqAndAutoMoq(string address, string messageBody, MessageService sut)
+    public void Send_WithAutoFixtureAutoMoqAndAutoMoqAttribute(string address, string messageBody, MessageService sut)
     {
         //arrange
         //act
