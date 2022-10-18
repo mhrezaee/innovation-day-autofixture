@@ -2,7 +2,7 @@
 using DemoApi.Benchmark;
 
 
-BenchmarkRunner.Run<BenchmarkTests>();
+BenchmarkRunner.Run<ObjectCreationBenchMark>();
 
 
 Console.ReadKey();
