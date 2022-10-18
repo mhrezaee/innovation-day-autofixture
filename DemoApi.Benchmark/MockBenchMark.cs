@@ -1,11 +1,8 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
-using AutoFixture.Xunit2;
 using BenchmarkDotNet.Attributes;
-using DemoApi.Benchmark.Attributes;
 using DemoApi.Benchmark.Services;
 using Moq;
-using Xunit;
 
 namespace DemoApi.Benchmark;
 
@@ -14,8 +11,7 @@ namespace DemoApi.Benchmark;
 public class MockBenchMark
 {
     [Benchmark]
-    [Fact]
-    public void Send_WithMoq()
+    public void Test_WithMoq()
     {
 
         //arrange
@@ -29,8 +25,7 @@ public class MockBenchMark
     }
 
     [Benchmark]
-    [Fact]
-    public void Send_WithAutoFixtureAutoMoq()
+    public void Test_WithAutoFixtureAutoMoq()
     {
         //arrange
         var fixture = new Fixture();
