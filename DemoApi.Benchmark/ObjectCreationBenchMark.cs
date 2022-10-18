@@ -5,7 +5,7 @@ namespace DemoApi.Benchmark;
 
 
 [MemoryDiagnoser]
-public class BenchmarkTests
+public class ObjectCreationBenchMark
 {
     [Benchmark]
     public List<Employee> Test_1_Manual_Objects()

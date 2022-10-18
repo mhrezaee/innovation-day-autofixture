@@ -10,10 +10,10 @@ namespace DemoApi.Tests.ServiceTests;
 
 public class MessageServiceTests
 {
+
     [Fact]
     public void Send_WithMoq()
     {
-
         //arrange
         var gatewayMock = new Mock<IMessageGateway>();
         var sut = new MessageService(gatewayMock.Object);
@@ -22,9 +22,8 @@ public class MessageServiceTests
         var result = sut.Send("email@test.com", "some message here");
 
         //assert
-        gatewayMock.Verify(x=>x.Send(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        gatewayMock.Verify(x => x.Send(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         result.Should().BeTrue();
-
     }
 
     [Fact]
@@ -44,7 +43,7 @@ public class MessageServiceTests
 
     [Theory]
     [AutoData]
-    public void Send_WithAutoFixtureAutoMoqAndAutoData(string address,string messageBody)
+    public void Send_WithAutoFixtureAutoMoqAndAutoData(string address, string messageBody)
     {
         //arrange
         var fixture = new Fixture();
@@ -56,12 +55,11 @@ public class MessageServiceTests
 
         //assert
         result.Should().BeTrue();
-
     }
 
     [Theory]
     [AutoMoqData]
-    public void Send_WithAutoFixtureAutoMoqAndAutoMoq(string address, string messageBody, MessageService sut)
+    public void Send_WithAutoFixtureAutoMoqAndAutoMoqAttribute(string address, string messageBody, MessageService sut)
     {
         //arrange
         //act
@@ -102,4 +100,5 @@ public class MessageServiceTests
         mockGateway.Verify(x => x.Send(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         result.Should().BeTrue();
     }
+    
 }
